@@ -1,0 +1,290 @@
+:root {
+  --primary-color: #0f172a;
+  --secondary-color: #334155;
+  --accent-color: #2563eb;
+  --bg-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-main: #1e293b;
+  --font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radius-lg: 1rem;
+
+  /* Mejora: en vez de forzar clases de Bootstrap con !important,
+     redefinimos directamente las variables que Bootstrap 5.3 ya expone.
+     Así .text-primary, .bg-primary y .bg-primary-subtle heredan
+     nuestro color de marca de forma nativa, sin pelear especificidad. */
+  --bs-primary: var(--accent-color);
+  --bs-primary-rgb: 37, 99, 235;
+  --bs-link-color: var(--accent-color);
+  --bs-link-hover-color: #1d4ed8;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+/* Mejora: bg-fondo es una clase propia (no choca con Bootstrap),
+   así que no necesita !important: alcanza con el orden natural de la cascada. */
+.bg-fondo { background-color: var(--bg-color); }
+
+.btn-primary { background-color: var(--accent-color); border: none; }
+.btn-primary:hover { background-color: #1d4ed8; }
+.bg-primary-subtle { background-color: #eff6ff; }
+
+/* Menú Lateral */
+.sidebar-custom {
+  background-color: var(--primary-color);
+  width: 280px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-custom {
+  color: #94a3b8;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.nav-link-custom:hover,
+.nav-link-custom.active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+.hover-danger:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Diseño de Tarjetas */
+.card-custom {
+  background-color: var(--surface-color);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-custom:hover {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  transform: translateY(-2px);
+}
+.transition-all { transition: all 0.2s ease; }
+
+/* Comportamiento de SPA (Secciones) */
+.seccion-oculta { display: none; }
+.seccion-activa { display: block; animation: fadeIn 0.4s ease-in-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cursor-pointer { cursor: pointer; }
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* COLORES ESPECÍFICOS PARA LA TABLA DE HORARIOS
+   Mejora: Bootstrap aplica el fondo de las celdas de tabla mediante
+   ".table > :not(caption) > * > *" (2 clases de especificidad), por lo
+   que un solo ".bg-materia-verde" (1 clase) pierde ese pulso y antes
+   necesitaba !important para ganar. En vez de forzarlo, calificamos el
+   selector con ".tabla-horarios" + la etiqueta (td/th): dos clases y un
+   elemento superan a Bootstrap sin usar !important. */
+.bg-cabecera-amarilla { background-color: #ffe600; }
+.bg-materia-verde { background-color: #d4edda; }
+.bg-materia-lila { background-color: #e2d9f3; }
+.bg-materia-naranja { background-color: #ffe8d6; }
+.bg-materia-amarillo { background-color: #fff3cd; }
+.bg-materia-rosa { background-color: #f8d7da; }
+
+.tabla-horarios th.bg-cabecera-amarilla { background-color: #ffe600; }
+.tabla-horarios td.bg-materia-verde { background-color: #d4edda; }
+.tabla-horarios td.bg-materia-lila { background-color: #e2d9f3; }
+.tabla-horarios td.bg-materia-naranja { background-color: #ffe8d6; }
+.tabla-horarios td.bg-materia-amarillo { background-color: #fff3cd; }
+.tabla-horarios td.bg-materia-rosa { background-color: #f8d7da; }
+
+/* Mejora: en vez de !important sobre .tabla-horarios th/td, subimos
+   especificidad calificando el borde dentro de su propio contenedor. */
+.tabla-horarios.table-bordered th,
+.tabla-horarios.table-bordered td {
+  border: 1px solid #6c757d;
+  padding: 0.75rem 0.5rem;
+}
+.tabla-horarios small {
+  display: block;
+  font-size: 0.75em;
+  margin-top: 4px;
+}
+
+/* ============================= */
+/* COLOR POR MATERIA (sección Materias) */
+/* Mismos colores que la tabla de Horarios, para asociar visualmente */
+/* la materia en toda la app.                                        */
+/* ============================= */
+.materia-color-verde { border-left: 5px solid #28a745; }
+.materia-color-naranja { border-left: 5px solid #fd7e14; }
+.materia-color-lila { border-left: 5px solid #6f42c1; }
+.materia-color-amarillo { border-left: 5px solid #ffc107; }
+.materia-color-rosa { border-left: 5px solid #dc3545; }
+
+.materia-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.materia-dot-verde { background-color: #28a745; }
+.materia-dot-naranja { background-color: #fd7e14; }
+.materia-dot-lila { background-color: #6f42c1; }
+.materia-dot-amarillo { background-color: #ffc107; }
+.materia-dot-rosa { background-color: #dc3545; }
+
+/* ============================= */
+/* TEMA OSCURO (toggle desde Configuración) */
+/* ============================= */
+body.tema-oscuro {
+  --bg-color: #0f172a;
+  --surface-color: #1e293b;
+  --text-main: #e2e8f0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+body.tema-oscuro .card-custom,
+body.tema-oscuro .materia-item,
+body.tema-oscuro .modal-content,
+body.tema-oscuro header {
+  background-color: var(--surface-color);
+  color: var(--text-main);
+  border-color: #334155;
+}
+body.tema-oscuro .text-dark { color: var(--text-main); }
+body.tema-oscuro .text-muted { color: #94a3b8; }
+body.tema-oscuro .table { color: var(--text-main); }
+
+/* ============================= */
+/* HERO / CARRUSEL DE INICIO      */
+/* ============================= */
+.hero-carousel {
+  position: relative;
+  height: 220px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.hero-carousel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-carousel img.slide-activa {
+  opacity: 1;
+}
+
+.hero-carousel .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,23,42,0) 40%, rgba(15,23,42,0.55) 100%);
+  pointer-events: none;
+}
+
+.hero-carousel .hero-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.hero-carousel .hero-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-carousel .hero-dots span.dot-activo {
+  background: #ffffff;
+  transform: scale(1.25);
+}
+
+/* ============================= */
+/* FOOTER                         */
+/* ============================= */
+.footer-custom {
+  background-color: var(--primary-color);
+  color: #cbd5e1;
+}
+
+.footer-custom a {
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-custom a:hover {
+  color: #ffffff;
+}
+
+.footer-custom .footer-brand {
+  color: #ffffff;
+}
+
+.footer-social-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social-link:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* RESPONSIVE                     */
+/* ============================= */
+@media (max-width: 767.98px) {
+  .hero-carousel { height: 170px; }
+  /* Mejora: en vez de !important, calificamos las 3 clases juntas
+     (.card.card-custom.p-4) que pesa más que el .p-4 de Bootstrap solo. */
+  .card.card-custom.p-4 { padding: 1.25rem; }
+  .tabla-horarios th, .tabla-horarios td { font-size: 0.7rem; padding: 0.5rem 0.35rem; }
+  .footer-custom { text-align: center; }
+  .footer-custom .footer-social-link { margin: 0 4px; }
+}
+
+@media (max-width: 575.98px) {
+  .hero-carousel { height: 140px; }
+  h2.h3 { font-size: 1.35rem; }
+}
