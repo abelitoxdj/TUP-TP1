@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portal de gestión académica de la Escuela Normal." />
+    <title>Portal Académico - Escuela Normal</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="bg-fondo m-0 p-0 d-flex flex-column min-vh-100">
+    <div class="d-flex flex-grow-1">
+      
+      <aside class="offcanvas-md offcanvas-start sidebar-custom text-white p-3 d-flex flex-column" tabindex="-1" id="sidebarMenu">
+        <div class="offcanvas-header d-md-none">
+          <h5 class="offcanvas-title fw-bold">Menú</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+        </div>
+        
+        <div class="offcanvas-body d-flex flex-column flex-grow-1 p-0">
+          <div class="user-box d-flex align-items-center gap-3 p-3 mb-4 rounded-4 shadow-sm">
+            <img src="https://i.pravatar.cc/100?img=12" alt="Foto de perfil" class="rounded-circle" width="45" height="45" />
+            <div class="lh-sm">
+              <div class="fw-bold text-dark">Ramiro</div>
+              <small class="text-secondary">Alumno Regular</small>
+            </div>
+          </div>
+
+          <nav class="nav flex-column gap-2 mb-auto w-100">
+            <a href="#inicio" class="nav-link nav-link-custom active px-3 py-2" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu">
+              <i class="fa-solid fa-house me-2"></i> Inicio
+            </a>
+            <a href="#perfil" class="nav-link nav-link-custom px-3 py-2" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu">
+              <i class="fa-solid fa-user me-2"></i> Mi Perfil
+            </a>
+            <a href="#materias" class="nav-link nav-link-custom px-3 py-2" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu">
+              <i class="fa-solid fa-book me-2"></i> Materias
+            </a>
+            <a href="#notas" class="nav-link nav-link-custom px-3 py-2" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu">
+              <i class="fa-solid fa-graduation-cap me-2"></i> Notas y Libreta
+            </a>
+            <a href="#horarios" class="nav-link nav-link-custom px-3 py-2" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu">
+              <i class="fa-solid fa-clock me-2"></i> Horarios
+            </a>
+          </nav>
+
+          <a href="#" id="btn-cerrar-sesion" class="nav-link text-danger mt-3 px-3 py-2 fw-semibold rounded-3 hover-danger">
+            <i class="fa-solid fa-right-from-bracket me-2"></i> Reiniciar vista
+          </a>
+        </div>
+      </aside>
+
+      <!-- Contenido Principal -->
+      <main class="flex-grow-1 d-flex flex-column w-100 main-content">
+        
+        <!-- Cabecera -->
+        <header class="bg-white p-3 px-4 d-flex justify-content-between align-items-center sticky-top border-bottom shadow-sm">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+              <h1 class="h5 mb-0 fw-bold text-dark">Escuela Normal</h1>
+              <small class="text-muted d-none d-sm-block">Portal interactivo para Alumnos y Padres</small>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-3 fs-5 text-secondary">
+            <!-- Botón de Configuración -->
+            <div class="dropdown">
+              <button class="btn btn-light rounded-circle d-flex align-items-center justify-content-center cursor-pointer position-relative" style="width:40px;height:40px;" type="button" id="btnConfiguracion" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Configuración">
+                <i class="fa-solid fa-gear"></i>
+                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="btnConfiguracion">
+                <li><h6 class="dropdown-header">Configuración</h6></li>
+                <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalPerfil">
+                    <i class="fa-solid fa-user-pen me-2 text-primary"></i> Editar perfil
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalPassword">
+                    <i class="fa-solid fa-key me-2 text-primary"></i> Cambiar contraseña
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalNotificaciones">
+                    <i class="fa-solid fa-bell me-2 text-primary"></i> Notificaciones
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" id="toggle-modo-oscuro">
+                    <i class="fa-solid fa-moon me-2 text-primary"></i> Tema oscuro
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item text-danger" href="#" id="btn-cerrar-sesion-menu">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <!-- Modal: Editar perfil -->
+        <div class="modal fade" id="modalPerfil" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-user-pen text-primary me-2"></i>Editar perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <form id="form-perfil">
+                  <div class="text-center mb-4">
+                    <img src="https://i.pravatar.cc/100?img=12" alt="Foto de perfil" class="rounded-circle mb-2" width="70" height="70" />
+                    <div>
+                      <label for="input-foto-perfil" class="btn btn-sm btn-outline-primary rounded-pill mt-1">
+                        <i class="fa-solid fa-camera me-1"></i> Cambiar foto
+                      </label>
+                      <input type="file" id="input-foto-perfil" accept="image/*" class="d-none" />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-semibold">Nombre completo</label>
+                    <input type="text" class="form-control" value="Ramiro Martin" required />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-semibold">Correo electrónico</label>
+                    <input type="email" class="form-control" placeholder="tucorreo@gmail.com" />
+                  </div>
+                  <div class="mb-1">
+                    <label class="form-label small fw-semibold">Teléfono de contacto</label>
+                    <input type="tel" class="form-control" placeholder="381 XXX-XXXX" />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="form-perfil" class="btn btn-primary">Guardar cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: Cambiar contraseña -->
+        <div class="modal fade" id="modalPassword" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-key text-primary me-2"></i>Cambiar contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <form id="form-password">
+                  <div class="mb-3">
+                    <label class="form-label small fw-semibold">Contraseña actual</label>
+                    <input type="password" class="form-control" placeholder="••••••••" required />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-semibold">Nueva contraseña</label>
+                    <input type="password" class="form-control" placeholder="••••••••" required />
+                  </div>
+                  <div class="mb-1">
+                    <label class="form-label small fw-semibold">Repetir nueva contraseña</label>
+                    <input type="password" class="form-control" placeholder="••••••••" required />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="form-password" class="btn btn-primary">Guardar cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: Notificaciones -->
+        <div class="modal fade" id="modalNotificaciones" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-bell text-primary me-2"></i>Preferencias de notificaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" role="switch" id="notif-notas" checked />
+                  <label class="form-check-label" for="notif-notas">Nuevas notas cargadas</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" role="switch" id="notif-horarios" checked />
+                  <label class="form-check-label" for="notif-horarios">Cambios de horario</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="notif-avisos" />
+                  <label class="form-check-label" for="notif-avisos">Avisos generales de la institución</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Listo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secciones Dinámicas -->
+        <div class="p-3 p-md-4 flex-grow-1">
+          
+          <section id="inicio" class="seccion-activa">
+            <div class="card card-custom p-4 mb-4">
+              <div class="row align-items-center g-4">
+                <div class="col-12 col-md-7">
+                  <h2 class="h3 fw-bold mb-3 text-primary">Bienvenido a tu ciclo lectivo</h2>
+                  <p class="text-muted mb-4 lh-lg">
+                    Este portal está diseñado para brindar a nuestra comunidad educativa un acceso rápido y transparente a toda la información académica. Gestiona tus notas, asistencias y horarios desde un solo lugar.
+                  </p>
+                  <p id="texto-proxima-clase" class="alert alert-info border-0 shadow-sm mb-0">Cargando próximos horarios...</p>
+                </div>
+                <div class="col-12 col-md-5">
+                  <div class="w-100 overflow-hidden rounded-4 shadow-sm" style="height: 200px;">
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="row g-4 bento-grid">
+            
+            <!-- SECCIÓN: PERFIL -->
+            <section id="perfil" class="col-12 col-xl-6 seccion-oculta">
+              <div class="card card-custom p-4 h-100">
+                <h2 class="h5 fw-bold text-dark mb-4 border-bottom pb-2">
+                  <i class="fa-solid fa-user text-primary me-2"></i> Perfil del Alumno
+                </h2>
+                <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                  <li class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted fw-medium">Nombre Completo</span>
+                    <span class="fw-bold text-dark">Ramiro Martin</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted fw-medium">Edad</span>
+                    <span class="fw-bold text-dark">22 años</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted fw-medium">Año</span>
+                    <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 rounded-pill">2° Año</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted fw-medium">Año de Ingreso</span>
+                    <span class="fw-bold text-dark">2024</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- SECCIÓN: MATERIAS -->
+            <section id="materias" class="col-12 col-xl-6 seccion-oculta">
+              <div class="card card-custom p-4 h-100">
+                <h2 class="h5 fw-bold text-dark mb-3 border-bottom pb-2">
+                  <i class="fa-solid fa-book text-primary me-2"></i> Materias en curso
+                </h2>
+                <input type="text" id="buscador-materias" class="form-control bg-light border-0 mb-4 shadow-none" placeholder="🔍 Buscar materia..." />
+                
+                <div id="lista-materias" class="d-flex flex-column gap-3 overflow-auto pe-2" style="max-height: 400px;">
+                  <div class="materia-item materia-color-verde p-3 border rounded-4 bg-white hover-shadow transition-all">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <h3 class="h6 fw-bold mb-0 titulo-materia text-dark"><span class="materia-dot materia-dot-verde"></span>Programación IV</h3>
+                        <small class="text-muted">Ing. Moreno / TUP Costilla</small>
+                      </div>
+                      <span class="badge bg-success-subtle text-success px-2 py-1">85% Asistencia</span>
+                    </div>
+                    <div class="progress mt-3" style="height: 6px">
+                      <div class="progress-bar bg-primary" style="width: 85%"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="materia-item materia-color-naranja p-3 border rounded-4 bg-white hover-shadow transition-all">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <h3 class="h6 fw-bold mb-0 titulo-materia text-dark"><span class="materia-dot materia-dot-naranja"></span>Gestión de desarrollo de Software</h3>
+                        <small class="text-muted">Ing. Ayunta, Irene</small>
+                      </div>
+                      <span class="badge bg-success-subtle text-success px-2 py-1">92% Asistencia</span>
+                    </div>
+                    <div class="progress mt-3" style="height: 6px">
+                      <div class="progress-bar bg-info" style="width: 92%"></div>
+                    </div>
+                  </div>
+
+                  <div class="materia-item materia-color-lila p-3 border rounded-4 bg-white hover-shadow transition-all">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <h3 class="h6 fw-bold mb-0 titulo-materia text-dark"><span class="materia-dot materia-dot-lila"></span>Metodología de Sistemas II</h3>
+                        <small class="text-muted">Ing. Estrada, Cynthia</small>
+                      </div>
+                      <span class="badge bg-success-subtle text-success px-2 py-1">88% Asistencia</span>
+                    </div>
+                    <div class="progress mt-3" style="height: 6px">
+                      <div class="progress-bar bg-warning" style="width: 88%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECCIÓN: NOTAS -->
+            <section id="notas" class="col-12 seccion-oculta">
+              <div class="row g-4">
+                <div class="col-12 col-lg-8">
+                  <div class="card card-custom p-4 h-100">
+                    <h2 class="h5 fw-bold text-dark mb-4 border-bottom pb-2">
+                      <i class="fa-solid fa-graduation-cap text-primary me-2"></i> Boletín de Calificaciones
+                    </h2>
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle text-center mb-0">
+                        <thead class="table-light">
+                          <tr>
+                            <th class="text-start rounded-start">Materia</th>
+                            <th>1° Trim</th>
+                            <th>2° Trim</th>
+                            <th>3° Trim</th>
+                            <th class="rounded-end">Final</th>
+                          </tr>
+                        </thead>
+                        <tbody class="border-top-0">
+                          <tr>
+                            <td class="text-start fw-semibold text-secondary">Programación IV</td>
+                            <td>8</td><td>7</td><td>-</td><td>-</td>
+                          </tr>
+                          <tr>
+                            <td class="text-start fw-semibold text-secondary">Gestión de desarrollo</td>
+                            <td>9</td><td>9</td><td>-</td><td>-</td>
+                          </tr>
+                          <tr>
+                            <td class="text-start fw-semibold text-secondary">Metodología de Sistemas II</td>
+                            <td>7</td><td>8</td><td>-</td><td>-</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <button id="btn-imprimir-notas" class="btn btn-outline-primary mt-4 w-100 w-md-auto ms-auto d-block d-print-none rounded-pill">
+                      <i class="fa-solid fa-print me-2"></i> Imprimir Boletín
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="col-12 col-lg-4 d-print-none">
+                  <div class="card card-custom bg-primary-subtle border-0 p-4 h-100">
+                    <h6 class="fw-bold text-primary mb-3">Simulador de Promedio</h6>
+                    <p class="small text-muted mb-4">Calcula cuánto necesitas para aprobar.</p>
+                    <div class="d-flex gap-2 mb-3">
+                      <input type="number" id="nota1" class="form-control border-0 shadow-sm" placeholder="T1" min="1" max="10" />
+                      <input type="number" id="nota2" class="form-control border-0 shadow-sm" placeholder="T2" min="1" max="10" />
+                      <input type="number" id="nota3" class="form-control border-0 shadow-sm" placeholder="T3" min="1" max="10" />
+                    </div>
+                    <button id="btn-calcular" class="btn btn-primary w-100 rounded-pill shadow-sm">Calcular</button>
+                    <div id="resultado-promedio" class="mt-4 text-center"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECCIÓN: HORARIOS (Diseño de la imagen) -->
+            <section id="horarios" class="col-12 seccion-oculta">
+              <div class="card card-custom p-4 h-100">
+                <h2 class="h5 fw-bold text-dark mb-4 border-bottom pb-2">
+                  <i class="fa-solid fa-clock text-primary me-2"></i> Horarios de Clase
+                </h2>
+                
+                <div class="table-responsive">
+                  <table class="table table-bordered text-center align-middle small mb-0 tabla-horarios">
+                    <thead>
+                      <tr>
+                        <th colspan="6" class="bg-cabecera-amarilla text-dark py-2 border-dark text-uppercase fw-bold" style="font-size: 0.85rem;">
+                          2° Año - Turno Tarde - 2° Cuatrimestre - Casa Central - C4
+                        </th>
+                      </tr>
+                      <tr class="bg-light">
+                        <th class="py-2 border-dark">Horas</th>
+                        <th class="py-2 border-dark">Lunes</th>
+                        <th class="py-2 border-dark">Martes</th>
+                        <th class="py-2 border-dark">Miércoles</th>
+                        <th class="py-2 border-dark">Jueves</th>
+                        <th class="py-2 border-dark">Viernes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="fw-bold text-dark border-dark align-middle">14:00 a<br>14:40</td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">TUP Costilla, Georgina</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">Ing. Moreno, Javier</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">Ing. Moreno, Javier</small></td>
+                        <td class="bg-materia-lila border-dark">Metodología de<br>Sistemas II<br><small class="text-muted">Ing. Estrada, Cynthia</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">TUP Costilla, Georgina</small></td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold text-dark border-dark align-middle">14:40 a<br>15:20</td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">TUP Costilla, Georgina</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">Ing. Moreno, Javier</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">Ing. Moreno, Javier</small></td>
+                        <td class="bg-materia-lila border-dark">Metodología de<br>Sistemas II<br><small class="text-muted">Ing. Estrada, Cynthia</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">TUP Costilla, Georgina</small></td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold text-dark border-dark align-middle">15:20 a<br>16:00</td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">TUP Costilla, Georgina</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">Ing. Moreno, Javier</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">Ing. Moreno, Javier</small></td>
+                        <td class="bg-materia-lila border-dark">Metodología de<br>Sistemas II<br><small class="text-muted">Ing. Estrada, Cynthia</small></td>
+                        <td class="bg-materia-verde border-dark">Programación IV<br><small class="text-muted">TUP Costilla, Georgina</small></td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold text-dark border-dark align-middle">16:00 a<br>16:40</td>
+                        <td class="bg-materia-naranja border-dark">Gestión de desarrollo de<br>Software<br><small class="text-muted">Ing. Ayunta, Irene</small></td>
+                        <td class="bg-materia-amarillo border-dark">Legislación<br><small class="text-muted">Dra. Juarez, Ma. Laura</small></td>
+                        <td class="bg-materia-naranja border-dark">Gestión de desarrollo de<br>Software<br><small class="text-muted">Ing. Ayunta, Irene</small></td>
+                        <td class="bg-materia-rosa border-dark">Introducción al análisis<br>de Datos<br><small class="text-muted">Ing. Trevisan, Gabriel</small></td>
+                        <td class="bg-materia-lila border-dark">Metodología de<br>Sistemas II<br><small class="text-muted">Ing. Estrada, Cynthia</small></td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold text-dark border-dark align-middle">16:40 a<br>17:20</td>
+                        <td class="bg-materia-naranja border-dark">Gestión de desarrollo de<br>Software<br><small class="text-muted">Ing. Ayunta, Irene</small></td>
+                        <td class="bg-materia-amarillo border-dark">Legislación<br><small class="text-muted">Dra. Juarez, Ma. Laura</small></td>
+                        <td class="bg-materia-naranja border-dark">Gestión de desarrollo de<br>Software<br><small class="text-muted">Ing. Ayunta, Irene</small></td>
+                        <td class="bg-materia-rosa border-dark">Introducción al análisis<br>de Datos<br><small class="text-muted">Ing. Trevisan, Gabriel</small></td>
+                        <td class="bg-materia-lila border-dark">Metodología de<br>Sistemas II<br><small class="text-muted">Ing. Estrada, Cynthia</small></td>
+                      </tr>
+                      <tr>
+                        <td class="fw-bold text-dark border-dark align-middle">17:20 a<br>18:00</td>
+                        <td class="bg-materia-naranja border-dark">Gestión de desarrollo de<br>Software<br><small class="text-muted">Ing. Ayunta, Irene</small></td>
+                        <td class="bg-materia-amarillo border-dark">Legislación<br><small class="text-muted">Dra. Juarez, Ma. Laura</small></td>
+                        <td class="bg-materia-naranja border-dark">Gestión de desarrollo de<br>Software<br><small class="text-muted">Ing. Ayunta, Irene</small></td>
+                        <td class="bg-materia-rosa border-dark">Introducción al análisis<br>de Datos<br><small class="text-muted">Ing. Trevisan, Gabriel</small></td>
+                        <td class="bg-materia-lila border-dark">Metodología de<br>Sistemas II<br><small class="text-muted">Ing. Estrada, Cynthia</small></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Footer: fuera del contenedor con sidebar para ocupar TODO el ancho de la página -->
+    <footer class="footer-custom p-4 px-md-5">
+      <div class="row gy-4 align-items-start">
+        <div class="col-12 col-md-5">
+          <h5 class="footer-brand fw-bold mb-0">
+            <i class="fa-solid fa-graduation-cap me-2"></i> Escuela Normal
+          </h5>
+        </div>
+        <div class="col-6 col-md-3">
+          <h6 class="text-white-50 text-uppercase small fw-bold mb-3">Contacto</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 small mb-0">
+            <li>
+              <a href="mailto:escuelanormal@gmail.com">
+                <i class="fa-solid fa-envelope me-2"></i> escuelanormal@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/5493816803874" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp me-2"></i> 3816 803874
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4">
+          <h6 class="text-white-50 text-uppercase small fw-bold mb-3">Seguinos</h6>
+          <div class="d-flex gap-2">
+            <a href="mailto:escuelanormal@gmail.com" class="footer-social-link" aria-label="Email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://wa.me/5493816803874" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr class="border-secondary opacity-25 my-4" />
+      <p class="text-center small mb-0 text-white-50">
+        &copy; 2026 Escuela Normal - Portal Academico. Todos los derechos reservados.
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
